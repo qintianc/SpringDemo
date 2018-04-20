@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mudi.dao.TUserDao" >
+  <resultMap id="BaseResultMap" type="com.mudi.model.TUser" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="WX_OPEN_ID" property="wxOpenId" jdbcType="VARCHAR" />
+    <result column="WX_USER_NAME" property="wxUserName" jdbcType="VARCHAR" />
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+    <result column="MOBILE_NUMBER" property="mobileNumber" jdbcType="VARCHAR" />
+    <result column="SALES_NO" property="salesNo" jdbcType="VARCHAR" />
+    <result column="CREATE_AT" property="createAt" jdbcType="OTHER" />
+    <result column="AUTH_STATUS" property="authStatus" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="WX_UNIONID" property="wxUnionid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_NAME,  WX_OPEN_ID, WX_USER_NAME, ID_CARD, MOBILE_NUMBER, 
+    SALES_NO, CREATE_AT,  AUTH_STATUS, STATUS,WX_UNIONID
+  </sql>
+  
+  <select id="getUserBySalesNo" parameterType="String" resultMap="BaseResultMap">
+  	select * from t_user where sales_no = #{salesNo} and rownum = 1
+  </select>
+  <update id="updateBySalesNo" parameterType="String">
+  	update t_user set WX_CITY = '林' where sales_no = #{salesNo} and id = 207
+  </update>
+</mapper>

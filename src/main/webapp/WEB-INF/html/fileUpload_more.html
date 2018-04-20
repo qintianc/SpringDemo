@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件上传</title>
+</head>
+<body>
+	<br />
+	<br />
+	<form action="/fileUpload/upMore" method="post" enctype="multipart/form-data">  
+    <!-- 上传多个文件，用List<MultipartFile> pic接收 -->  
+    <input type="file" name="pic[0]"><br/><br/>  
+    <input type="file" name="pic[1]"><br/><br/>  
+    <input type="file" name="pic[2]"><br/><br/>  
+    <input type="file" name="pic[3]"><br/><br/>  
+    <input type="submit" value="多文件上传">  
+</form>  
+</body>
+</html>
