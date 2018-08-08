@@ -22,7 +22,7 @@
 	<!-- 开启aop注解扫描 -->
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
 
-	<task:annotation-driven/>
+	<!-- <task:annotation-driven/> -->
 	<!-- <bean id="springTaskTest" class="com.mudi.demo.SpringTaskTest"></bean>
 
     <task:scheduled-tasks >
