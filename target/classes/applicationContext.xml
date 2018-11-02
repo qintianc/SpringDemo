@@ -1,6 +1,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
             http://www.springframework.org/schema/beans/spring-beans.xsd  
@@ -22,15 +24,12 @@
 	<!-- 开启aop注解扫描 -->
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
 
-	<task:annotation-driven/>
-	<!-- <bean id="springTaskTest" class="com.mudi.demo.SpringTaskTest"></bean>
+	<!-- <task:annotation-driven/> -->
+	<!-- <bean id="springTaskTest" class="com.mudi.demo.SpringTaskTest"></bean> 
+		<task:scheduled-tasks > 每小时的0秒开始触发，每隔3秒钟触发一次 <task:scheduled ref="springTaskTest" 
+		method="execute" cron="0/5 * * * * ?"/> </task:scheduled-tasks> -->
 
-    <task:scheduled-tasks >
-    	每小时的0秒开始触发，每隔3秒钟触发一次
-        <task:scheduled ref="springTaskTest" method="execute" cron="0/5 * * * * ?"/>
-	</task:scheduled-tasks> -->
-	
-	
+
 	<!-- 消息转换器 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
@@ -54,7 +53,7 @@
 		view-name="IngorCtrlTest" />
 
 
-	<!-- html视图解析器 必须先配置freemarkerConfig,注意没有prefix前缀属性的 -->
+	<!-- html视图解析器 必须先配置freemarkerConfig,注意html是没有prefix前缀属性的 -->
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
@@ -65,67 +64,14 @@
 			<value>utf-8</value>
 		</property>
 	</bean>
-
-	<!-- 多视图解析器管理 -->
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="contentNegotiationManager" ref="cnManager" />
-		<property name="viewResolvers">
-			<list>
-				<!-- JSP -->
-				<bean
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<!-- 配置路径前缀 -->
-					<property name="prefix" value="/WEB-INF/jsp/" />
-					<!-- 配置路径后缀 -->
-					<property name="suffix" value=".jsp" />
-					<!-- 视图解析的优先级，数目越小优先级越大（即：0为优先级最高，所以优先进行处理视图） -->
-					<property name="order" value="10" />
-				</bean>
-
-				<!-- FreeMarkerViewResolver -->
-				<bean id="htmlviewResolver"
-					class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-					<property name="suffix" value=".html" />
-					<property name="order" value="1"></property>
-					<property name="contentType" value="text/html;charset=UTF-8"></property>
-				</bean>
-
-
-				<!-- 这个视图解析器跟XmlViewResolver有点类似，也是通过把返回的逻辑视图名称去匹配定义好的视图bean对象 -->
-				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
-					<property name="order" value="3" />
-				</bean>
-
-				<!-- Default viewClass: JSTL view (JSP with html output) -->
-				<bean
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<!-- 配置路径前缀 -->
-					<property name="prefix" value="/WEB-INF/jsp/" />
-					<!-- 配置路径后缀 -->
-					<property name="suffix" value=".jsp" />
-					<!-- 视图解析的优先级，数目越小优先级越大（即：0为优先级最高，所以优先进行处理视图） -->
-					<property name="order" value="10" />
-				</bean>
-			</list>
-		</property>
+	<bean id="htmlviewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="suffix" value=".html" />
+		<property name="order" value="0"></property>
+		<property name="contentType" value="text/html;charset=UTF-8"></property>
 	</bean>
 
-	<!-- 内容协商管理器 -->
-	<bean id="cnManager"
-		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-		<property name="favorPathExtension" value="true" />
-		<property name="ignoreAcceptHeader" value="true" />
-		<property name="defaultContentType" value="text/html" />
 
-		<property name="mediaTypes">
-			<map>
-				<entry key="html" value="text/html" />
-				<entry key="xml" value="application/xml" />
-				<entry key="atom" value="application/atom+xml" />
-			</map>
-		</property>
-	</bean>
 
 	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
 	<bean id="multipartResolver"
