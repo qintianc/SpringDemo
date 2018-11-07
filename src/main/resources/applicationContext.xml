@@ -4,6 +4,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
             http://www.springframework.org/schema/beans/spring-beans.xsd  
             http://www.springframework.org/schema/mvc  
@@ -11,7 +12,10 @@
             http://www.springframework.org/schema/context  
             http://www.springframework.org/schema/context/spring-context.xsd
             http://www.springframework.org/schema/task 
-            http://www.springframework.org/schema/task/spring-task.xsd"
+            http://www.springframework.org/schema/task/spring-task.xsd    
+            http://www.springframework.org/schema/aop 
+    		http://www.springframework.org/schema/aop/spring-aop.xsd"
+            
 	default-lazy-init="true">
 
 	<!-- 设置静态资源访问 -->
@@ -22,13 +26,7 @@
 	<!-- IOC自动扫描包 -->
 	<context:component-scan base-package="com.mudi" />
 	<!-- 开启aop注解扫描 -->
-	<!-- <aop:aspectj-autoproxy proxy-target-class="true" /> -->
-
-	<!-- <task:annotation-driven/> -->
-	<!-- <bean id="springTaskTest" class="com.mudi.demo.SpringTaskTest"></bean> 
-		<task:scheduled-tasks > 每小时的0秒开始触发，每隔3秒钟触发一次 <task:scheduled ref="springTaskTest" 
-		method="execute" cron="0/5 * * * * ?"/> </task:scheduled-tasks> -->
-
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- 消息转换器 -->
 	<bean
@@ -57,7 +55,7 @@
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
-			<value>/WEB-INF/html/</value>
+			<value>/WEB-INF/views/</value>
 		</property>
 		<!-- 设置页面编码格式 -->
 		<property name="defaultEncoding">
