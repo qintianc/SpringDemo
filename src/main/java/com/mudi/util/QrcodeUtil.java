@@ -50,7 +50,7 @@ public class QrcodeUtil {
 		/*
 		 * 二维码的纠错级别(排错率),4个级别： L (7%)、 M (15%)、 Q (25%)、 H (30%)(最高H)
 		 * 纠错信息同样存储在二维码中，纠错级别越高，纠错信息占用的空间越多，那么能存储的有用讯息就越少；共有四级； 选择M，扫描速度快。
-		 */
+		 */ 
 		// 纠正等
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 		// 二维码边界空白大小 1,2,3,4 (4为默认,最大),0为没有边界
