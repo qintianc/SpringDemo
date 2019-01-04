@@ -53,8 +53,8 @@ public class QrcodeUtil {
 		 */
 		// 纠正等
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-		// 二维码边界空白大小 1,2,3,4 (4为默认,最大)
-		hints.put(EncodeHintType.MARGIN, 1);
+		// 二维码边界空白大小 1,2,3,4 (4为默认,最大),0为没有边界
+		hints.put(EncodeHintType.MARGIN, 0);
 		// 编码
 		hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 		hints.put(EncodeHintType.MAX_SIZE, 350);
@@ -106,7 +106,7 @@ public class QrcodeUtil {
 	}
 
 	/**
-	 * 可修改二维码颜色,在此BufferedImage上添加的logo是原图片颜色
+	 * 输出二维码到BufferedImage，可修改二维码颜色,在此BufferedImage上添加的logo是原图片颜色
 	 * @param contents
 	 * @return
 	 */
